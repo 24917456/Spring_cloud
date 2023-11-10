@@ -12,6 +12,10 @@ spring:
           ####搜索目录
           search-paths:
             - Spring_cloud
+          skip-ssl-validation: true
+          username: 24917456@qq.com
+          password: hzg.20011210
+
       ####读取分支
       label: master
 
