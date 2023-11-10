@@ -1,0 +1,31 @@
+server:
+  port: 9527
+
+spring:
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true #开启从注册中心自动创建路由，利用微服务名执行路由
+      routes:
+        - id: payment-route1
+          uri: lb://CLOUD-PAYMENT-SERVICE
+          predicates:
+             - Path=/payment/get/**
+             - After=2023-11-09T09:22:39.580+08:00[Asia/Shanghai]
+
+        - id: payment-route2
+          uri: lc://CLOUD-PAYMENT-SERVICE
+          predicates:
+            - Path=/payment/port
+            - Cookie=username,qiu
+  application:
+    name: gateway9527
+
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka
+
